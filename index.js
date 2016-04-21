@@ -8,11 +8,33 @@
 'use strict';
 
 var debug = require('debug')('pkg-cache');
+var Cache = require('./lib/cache');
 var utils = require('./lib/utils');
 
-module.exports = pkgCache;
+/**
+ * Get the package.json for one or more `names`. Results are cached for
+ * 1 week by default.
+ *
+ * ```js
+ * pkgCache(['micromatch', 'generate'], function(err, pkgs) {
+ *   if (err) throw err;
+ *   console.log(pkgs);
+ * });
+ *
+ * // cache for
+ * pkgCache(['micromatch', 'generate'], function(err, pkgs) {
+ *   if (err) throw err;
+ *   console.log(pkgs);
+ * });
+ * ```
+ * @param {String|Array} `names` package names
+ * @param {Object} `options`
+ * @param {Function} `callback`
+ * @return {Array} Returns an array of package.json objects.
+ * @api public
+ */
 
-function pkgCache(names, options, cb) {
+module.exports = function pkgCache(names, options, cb) {
   debug('getting the package.json for:', names);
 
   if (typeof options === 'function') {
@@ -24,19 +46,36 @@ function pkgCache(names, options, cb) {
     throw new Error('expected a callback function');
   }
 
+  if (typeof options === 'string') {
+    options = { timespan: options };
+  }
+
   options = options || {};
   names = utils.arrayify(names).slice();
 
   var timespan = options.timespan || '1 week ago';
-  var dates = new utils.Dates('pkg-cache', options);
-  var store = new utils.Store('pkg-cache', options);
+  if (typeof options.maxAge === 'string') {
+    timespan = utils.maxAge(options.maxAge);
+  }
 
-  var stored = utils.getEach(store, dates, timespan, names);
-  var arr = utils.filter(names, stored);
+  var cache = new Cache('pkg-cache', options);
+  var cached = cache.getNewerThan(timespan);
+  var keys = Object.keys(cached);
+  var uncached = utils.filter(names, keys);
 
-  utils.pkgs(arr, function(err, res) {
+  utils.pkgs(uncached, function(err, res) {
     if (err) return cb(err);
-    utils.setEach(store, dates, res);
-    cb(null, res.concat(stored), arr);
+
+    for (var i = 0; i < res.length; i++) {
+      cache.set(res[i].name, res[i]);
+    }
+
+    if (keys.length && options.nostore !== true) {
+      keys.forEach(function(key) {
+        res.push(cached[key]);
+      });
+    }
+
+    cb(null, res, uncached);
   });
-}
+};

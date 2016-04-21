@@ -24,7 +24,6 @@
     "date-store": "^0.1.2",
     "debug": "^2.2.0",
     "get-pkgs": "^0.5.0",
-    "isobject": "^2.0.0",
     "lazy-cache": "^1.0.3"
   },
   "devDependencies": {
@@ -59,13 +58,21 @@
     "reflinks": [
       "verb"
     ],
-    "layout": "default",
+    "related": {
+      "list": [
+        "data-store",
+        "date-store",
+        "get-pkg",
+        "get-pkgs"
+      ]
+    },
     "toc": false,
-    "tasks": [
-      "readme"
-    ],
+    "layout": "default",
     "lint": {
       "reflinks": true
-    }
+    },
+    "tasks": [
+      "readme"
+    ]
   }
 }

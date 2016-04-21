@@ -1,7 +1,6 @@
 'use strict';
 
 require('mocha');
-// require('time-require');
 var assert = require('assert');
 var utils = require('./lib/utils');
 var pkgCache = require('./');
@@ -20,12 +19,44 @@ describe('pkg-cache', function() {
     });
   });
 
-  it('should expose the array of uncached package names as the last argument', function(cb) {
+  it('should cache packages by default', function(cb) {
     var fixtures = ['base', 'base-task', 'base-option'];
     pkgCache(fixtures, function(err, res, arr) {
       if (err) return cb(err);
+      assert.deepEqual(arr, []);
+      cb();
+    });
+  });
+
+  it('should expose the array of uncached package names as the last argument', function(cb) {
+    var fixtures = ['base'];
+    pkgCache(fixtures, 'now', function(err, res, arr) {
+      if (err) return cb(err);
       assert.deepEqual(arr.sort(), fixtures.sort());
       cb();
+    });
+  });
+
+  it('should use `options.maxAge` as timespan', function(cb) {
+    var fixtures = ['base'];
+    pkgCache(fixtures, {maxAge: '0 sec'}, function(err, res, arr) {
+      if (err) return cb(err);
+      assert.deepEqual(arr.sort(), fixtures.sort());
+      cb();
+    });
+  });
+
+  it('should cache when `options.maxAge` is defined', function(cb) {
+    var fixtures = ['base'];
+
+    pkgCache(fixtures, function(err, res, arr) {
+      if (err) return cb(err);
+
+      pkgCache(fixtures, {maxAge: '1 week'}, function(err, res, arr) {
+        if (err) return cb(err);
+        assert.deepEqual(arr, []);
+        cb();
+      });
     });
   });
 
