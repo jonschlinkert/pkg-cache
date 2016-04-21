@@ -1,6 +1,6 @@
 # pkg-cache [![NPM version](https://img.shields.io/npm/v/pkg-cache.svg?style=flat)](https://www.npmjs.com/package/pkg-cache) [![NPM downloads](https://img.shields.io/npm/dm/pkg-cache.svg?style=flat)](https://npmjs.org/package/pkg-cache) [![Build Status](https://img.shields.io/travis/jonschlinkert/pkg-cache.svg?style=flat)](https://travis-ci.org/jonschlinkert/pkg-cache)
 
-> Gets the package.json for one or more names from the npm registry, and caches the results for a specified period of time. Default is one week.
+> Gets the package.json for one or more names from the npm registry and caches the results for a specified period of time. Default cache period is one week.
 
 ## Install
 
