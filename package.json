@@ -1,12 +1,12 @@
 {
-  "name": "get-pkgs-since",
-  "description": "Get the package.json for an array of repos from the npm registry.",
+  "name": "pkg-cache",
+  "description": "Gets the package.json for one or more names from the npm registry, and caches the results for a specified period of time. Default is one week.",
   "version": "0.1.0",
-  "homepage": "https://github.com/jonschlinkert/get-pkgs-since",
+  "homepage": "https://github.com/jonschlinkert/pkg-cache",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
-  "repository": "jonschlinkert/get-pkgs-since",
+  "repository": "jonschlinkert/pkg-cache",
   "bugs": {
-    "url": "https://github.com/jonschlinkert/get-pkgs-since/issues"
+    "url": "https://github.com/jonschlinkert/pkg-cache/issues"
   },
   "license": "MIT",
   "files": [
@@ -19,18 +19,53 @@
   "scripts": {
     "test": "mocha"
   },
-  "dependencies": {},
-  "devDependencies": {
-    "gulp-format-md": "*",
-    "mocha": "*"
+  "dependencies": {
+    "data-store": "^0.15.5",
+    "date-store": "^0.1.2",
+    "debug": "^2.2.0",
+    "get-pkgs": "^0.5.0",
+    "isobject": "^2.0.0",
+    "lazy-cache": "^1.0.3"
   },
-  "keywords": [],
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^2.0.0",
+    "gulp-format-md": "^0.1.8",
+    "gulp-istanbul": "^0.10.4",
+    "gulp-mocha": "^2.2.0",
+    "gulp-unused": "^0.1.2",
+    "mocha": "^2.4.5"
+  },
+  "keywords": [
+    "cache",
+    "data",
+    "date",
+    "get",
+    "json",
+    "package",
+    "package-json",
+    "packages",
+    "pkg",
+    "set",
+    "since",
+    "store",
+    "time",
+    "timespan"
+  ],
   "verb": {
+    "plugins": [
+      "gulp-format-md"
+    ],
+    "reflinks": [
+      "verb"
+    ],
     "layout": "default",
-    "plugins": ["gulp-format-md"],
-    "related": {
-      "list": []
-    },
-    "reflinks": ["verb"]
+    "toc": false,
+    "tasks": [
+      "readme"
+    ],
+    "lint": {
+      "reflinks": true
+    }
   }
 }
