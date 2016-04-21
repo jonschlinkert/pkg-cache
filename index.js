@@ -16,13 +16,20 @@ var utils = require('./lib/utils');
  * 1 week by default.
  *
  * ```js
- * pkgCache(['micromatch', 'generate'], function(err, pkgs) {
+ * // results are cached for 1 week by default
+ * pkgCache(['micromatch', 'base'], function(err, pkgs) {
  *   if (err) throw err;
  *   console.log(pkgs);
  * });
  *
- * // cache for
- * pkgCache(['micromatch', 'generate'], function(err, pkgs) {
+ * // customize the cache "max age"
+ * pkgCache(['micromatch', 'base'], {timespan: '1 week ago'}, function(err, pkgs) {
+ *   if (err) throw err;
+ *   console.log(pkgs);
+ * });
+ *
+ * // or
+ * pkgCache(['micromatch', 'base'], {maxAge: '0 sec'}, function(err, pkgs) {
  *   if (err) throw err;
  *   console.log(pkgs);
  * });

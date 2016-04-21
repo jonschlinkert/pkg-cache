@@ -13,13 +13,52 @@ $ npm install pkg-cache --save
 ## Usage
 
 ```js
-var pkgs = require('pkg-cache');
+var pkgCache = require('pkg-cache');
+```
 
-pkgs(['micromatch', 'base'], {since: 'yesterday'}, function(err, res) {
+## API
+
+### [pkgCache](index.js#L44)
+
+Get the package.json for one or more `names`. Results are cached for 1 week by default.
+
+**Params**
+
+* `names` **{String|Array}**: package names
+* `options` **{Object}**
+* `callback` **{Function}**
+* `returns` **{Array}**: Returns an array of package.json objects.
+
+**Example**
+
+```js
+// results are cached for 1 week by default
+pkgCache(['micromatch', 'base'], function(err, pkgs) {
   if (err) throw err;
-  console.log(res);
+  console.log(pkgs);
+});
+
+// customize the cache "max age"
+pkgCache(['micromatch', 'base'], {timespan: '1 week ago'}, function(err, pkgs) {
+  if (err) throw err;
+  console.log(pkgs);
+});
+
+// or
+pkgCache(['micromatch', 'base'], {maxAge: '0 sec'}, function(err, pkgs) {
+  if (err) throw err;
+  console.log(pkgs);
 });
 ```
+
+## Related projects
+
+You might also be interested in these projects:
+
+* [data-store](https://www.npmjs.com/package/data-store): Easily get, set and persist config data. | [homepage](https://github.com/jonschlinkert/data-store)
+* [date-store](https://www.npmjs.com/package/date-store): Easily persist or get stored dates/times. Useful for conditionally making updates in an application based… [more](https://www.npmjs.com/package/date-store) | [homepage](https://github.com/jonschlinkert/date-store)
+* [get-pkg](https://www.npmjs.com/package/get-pkg): Get the package.json for a project from npm. | [homepage](https://github.com/jonschlinkert/get-pkg)
+* [get-pkgs](https://www.npmjs.com/package/get-pkgs): Get the package.json for an array of repos from the npm registry, optionally filtering properties… [more](https://www.npmjs.com/package/get-pkgs) | [homepage](https://github.com/jonschlinkert/get-pkgs)
 
 ## Contributing
 
