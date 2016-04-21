@@ -66,7 +66,7 @@ module.exports = function pkgCache(names, options, cb) {
   }
 
   var cache = new Cache('pkg-cache', options);
-  var cached = cache.getNewerThan(timespan);
+  var cached = cache.filterNewerThan(names, timespan);
   var keys = Object.keys(cached);
   var uncached = utils.filter(names, keys);
 
