@@ -1,0 +1,36 @@
+{
+  "name": "get-pkgs-since",
+  "description": "Get the package.json for an array of repos from the npm registry.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/jonschlinkert/get-pkgs-since",
+  "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
+  "repository": "jonschlinkert/get-pkgs-since",
+  "bugs": {
+    "url": "https://github.com/jonschlinkert/get-pkgs-since/issues"
+  },
+  "license": "MIT",
+  "files": [
+    "index.js"
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "gulp-format-md": "*",
+    "mocha": "*"
+  },
+  "keywords": [],
+  "verb": {
+    "layout": "default",
+    "plugins": ["gulp-format-md"],
+    "related": {
+      "list": []
+    },
+    "reflinks": ["verb"]
+  }
+}
