@@ -21,20 +21,20 @@
     "test": "mocha"
   },
   "dependencies": {
-    "data-store": "^0.15.5",
+    "data-store": "^0.16.0",
     "date-store": "^0.1.2",
     "debug": "^2.2.0",
-    "get-pkgs": "^0.5.0",
-    "lazy-cache": "^1.0.3"
+    "get-pkgs": "^0.6.0",
+    "lazy-cache": "^2.0.1"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-eslint": "^2.0.0",
-    "gulp-format-md": "^0.1.8",
+    "gulp-format-md": "^0.1.9",
     "gulp-istanbul": "^0.10.4",
     "gulp-mocha": "^2.2.0",
     "gulp-unused": "^0.1.2",
-    "mocha": "^2.4.5"
+    "mocha": "^2.5.3"
   },
   "keywords": [
     "cache",
