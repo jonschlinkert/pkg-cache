@@ -69,11 +69,27 @@ module.exports = function pkgCache(names, options, cb) {
   var cached = cache.filterNewerThan(names, timespan);
   var uncached = utils.filter(names, cached);
 
-  utils.pkgs(uncached, function(err, res) {
-    if (err) return cb(err);
+  utils.pkgs(uncached, options, function(err, res) {
+    if (err) {
+      if (err.pkgName && err.message === 'document not found') {
+        cache.set(err.pkgName, {});
+        cb(null, res, uncached);
+        return;
+      }
+    }
 
+    var found = [];
     for (var i = 0; i < res.length; i++) {
+      found = found.concat(res[i].name);
       cache.set(res[i].name, res[i]);
+    }
+
+    if (options.silent) {
+      for (var i = 0; i < uncached.length; i++) {
+        if (found.indexOf(uncached[i]) === -1) {
+          cache.set(uncached[i], {});
+        }
+      }
     }
 
     if (cached.length && options.nostore !== true) {

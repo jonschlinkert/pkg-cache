@@ -46,6 +46,25 @@ describe('pkg-cache', function() {
     });
   });
 
+  it('should error on packages that do not exist', function(cb) {
+    pkgCache(['fififififififiifififififi', 'base'], {maxAge: '0 sec'}, function(err, res, arr) {
+      assert(!err);
+      assert(!res);
+      assert.deepEqual(arr, [ 'fififififififiifififififi', 'base' ]);
+      cb();
+    });
+  });
+
+  it('should not error on packages that do not exist when silent is true', function(cb) {
+    var fixtures = ['base'];
+    pkgCache(['fififififififiifififififi', 'base'], {maxAge: '0 sec', silent: true}, function(err, res, arr) {
+      assert(!err);
+      assert.deepEqual(utils.values(res, 'name').sort(), fixtures.sort());
+      assert.deepEqual(arr.sort(), ['fififififififiifififififi', 'base'].sort());
+      cb();
+    });
+  });
+
   it('should cache when `options.maxAge` is defined', function(cb) {
     var fixtures = ['base'];
 
