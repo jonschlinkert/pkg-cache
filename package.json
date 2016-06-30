@@ -1,7 +1,7 @@
 {
   "name": "pkg-cache",
   "description": "Gets the package.json for one or more names from the npm registry and caches the results for a specified period of time. Default cache period is one week.",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "homepage": "https://github.com/jonschlinkert/pkg-cache",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "jonschlinkert/pkg-cache",
@@ -56,8 +56,12 @@
     "plugins": [
       "gulp-format-md"
     ],
+    "toc": {
+      "method": "postLayout"
+    },
     "reflinks": [
-      "verb"
+      "verb",
+      "verb-readme-generator"
     ],
     "related": {
       "list": [
