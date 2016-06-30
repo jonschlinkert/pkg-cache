@@ -79,6 +79,7 @@ module.exports = function pkgCache(names, options, cb) {
     }
 
     var found = [];
+    res = res || [];
     for (var i = 0; i < res.length; i++) {
       found = found.concat(res[i].name);
       cache.set(res[i].name, res[i]);
@@ -96,6 +97,8 @@ module.exports = function pkgCache(names, options, cb) {
       res = res.concat(cached);
     }
 
+    uncached = uncached.filter(Boolean);
+    res = res.filter(Boolean);
     cb(null, res, uncached);
   });
 };
